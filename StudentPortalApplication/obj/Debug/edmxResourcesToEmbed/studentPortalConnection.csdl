@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="StudentPortalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Courses" EntityType="StudentPortalModel.Courses" />
+    <EntitySet Name="OldStudentCredential" EntityType="StudentPortalModel.OldStudentCredential" />
+    <EntitySet Name="StudentCourse" EntityType="StudentPortalModel.StudentCourse" />
+    <EntitySet Name="StudentCredential" EntityType="StudentPortalModel.StudentCredential" />
+    <AssociationSet Name="FK__StudentCo__cours__797309D9" Association="StudentPortalModel.FK__StudentCo__cours__797309D9">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentCo__stude__787EE5A0" Association="StudentPortalModel.FK__StudentCo__stude__787EE5A0">
+      <End Role="StudentCredential" EntitySet="StudentCredential" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <EntitySet Name="StudentInformation" EntityType="StudentPortalModel.StudentInformation" />
+    <AssociationSet Name="FK__StudentIn__stude__02084FDA" Association="StudentPortalModel.FK__StudentIn__stude__02084FDA">
+      <End Role="StudentCredential" EntitySet="StudentCredential" />
+      <End Role="StudentInformation" EntitySet="StudentInformation" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StudentCourse" Relationship="StudentPortalModel.FK__StudentCo__cours__797309D9" FromRole="Courses" ToRole="StudentCourse" />
+  </EntityType>
+  <EntityType Name="OldStudentCredential">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int64" Nullable="false" />
+    <Property Name="studentUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="studentPassword" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StudentCourse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="courseID" Type="Int64" Nullable="false" />
+    <Property Name="studentID" Type="Int64" Nullable="false" />
+    <Property Name="createdBy" Type="Int64" />
+    <Property Name="createDate" Type="DateTime" Precision="3" />
+    <Property Name="changedBy" Type="Int64" />
+    <Property Name="changeDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Courses" Relationship="StudentPortalModel.FK__StudentCo__cours__797309D9" FromRole="StudentCourse" ToRole="Courses" />
+    <NavigationProperty Name="StudentCredential" Relationship="StudentPortalModel.FK__StudentCo__stude__787EE5A0" FromRole="StudentCourse" ToRole="StudentCredential" />
+    <Property Name="completed" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="StudentCredential">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="studentUsername" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="studentPassword" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StudentCourse" Relationship="StudentPortalModel.FK__StudentCo__stude__787EE5A0" FromRole="StudentCredential" ToRole="StudentCourse" />
+    <NavigationProperty Name="StudentInformation" Relationship="StudentPortalModel.FK__StudentIn__stude__02084FDA" FromRole="StudentCredential" ToRole="StudentInformation" />
+  </EntityType>
+  <Association Name="FK__StudentCo__cours__797309D9">
+    <End Type="StudentPortalModel.Courses" Role="Courses" Multiplicity="1" />
+    <End Type="StudentPortalModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="courseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentCo__stude__787EE5A0">
+    <End Type="StudentPortalModel.StudentCredential" Role="StudentCredential" Multiplicity="1" />
+    <End Type="StudentPortalModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCredential">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="StudentInformation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="studentName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="studentSurname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="age" Type="Int32" Nullable="false" />
+    <Property Name="grade" Type="Int32" Nullable="false" />
+    <Property Name="phoneNumber" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="parentPhoneNumber" Type="Int32" Nullable="false" />
+    <Property Name="parentEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="studentID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="StudentCredential" Relationship="StudentPortalModel.FK__StudentIn__stude__02084FDA" FromRole="StudentInformation" ToRole="StudentCredential" />
+  </EntityType>
+  <Association Name="FK__StudentIn__stude__02084FDA">
+    <End Type="StudentPortalModel.StudentCredential" Role="StudentCredential" Multiplicity="1" />
+    <End Type="StudentPortalModel.StudentInformation" Role="StudentInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCredential">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="StudentInformation">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

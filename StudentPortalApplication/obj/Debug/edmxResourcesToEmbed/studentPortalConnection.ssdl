@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OldStudentCredential">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="bigint" Nullable="false" />
+    <Property Name="studentUsername" Type="nvarchar" MaxLength="255" />
+    <Property Name="studentPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentCourse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="courseID" Type="bigint" Nullable="false" />
+    <Property Name="studentID" Type="bigint" Nullable="false" />
+    <Property Name="createdBy" Type="bigint" />
+    <Property Name="createDate" Type="datetime" />
+    <Property Name="changedBy" Type="bigint" />
+    <Property Name="changeDate" Type="datetime" />
+    <Property Name="completed" Type="bit" />
+  </EntityType>
+  <EntityType Name="StudentCredential">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentUsername" Type="nvarchar" MaxLength="255" />
+    <Property Name="studentPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentInformation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="studentSurname" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="grade" Type="int" Nullable="false" />
+    <Property Name="phoneNumber" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="parentPhoneNumber" Type="int" Nullable="false" />
+    <Property Name="parentEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="studentID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__StudentCo__cours__797309D9">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+    <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="courseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentCo__stude__787EE5A0">
+    <End Role="StudentCredential" Type="Self.StudentCredential" Multiplicity="1" />
+    <End Role="StudentCourse" Type="Self.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCredential">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentIn__stude__02084FDA">
+    <End Role="StudentCredential" Type="Self.StudentCredential" Multiplicity="1" />
+    <End Role="StudentInformation" Type="Self.StudentInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudentCredential">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="StudentInformation">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentPortalModelStoreContainer">
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OldStudentCredential" EntityType="Self.OldStudentCredential" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentCourse" EntityType="Self.StudentCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentCredential" EntityType="Self.StudentCredential" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentInformation" EntityType="Self.StudentInformation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__StudentCo__cours__797309D9" Association="Self.FK__StudentCo__cours__797309D9">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentCo__stude__787EE5A0" Association="Self.FK__StudentCo__stude__787EE5A0">
+      <End Role="StudentCredential" EntitySet="StudentCredential" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentIn__stude__02084FDA" Association="Self.FK__StudentIn__stude__02084FDA">
+      <End Role="StudentCredential" EntitySet="StudentCredential" />
+      <End Role="StudentInformation" EntitySet="StudentInformation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

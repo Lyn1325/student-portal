@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StudentPortalModelStoreContainer" CdmEntityContainer="StudentPortalEntities">
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="StudentPortalModel.Courses">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OldStudentCredential">
+      <EntityTypeMapping TypeName="StudentPortalModel.OldStudentCredential">
+        <MappingFragment StoreEntitySet="OldStudentCredential">
+          <ScalarProperty Name="studentPassword" ColumnName="studentPassword" />
+          <ScalarProperty Name="studentUsername" ColumnName="studentUsername" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentCourse">
+      <EntityTypeMapping TypeName="StudentPortalModel.StudentCourse">
+        <MappingFragment StoreEntitySet="StudentCourse">
+          <ScalarProperty Name="completed" ColumnName="completed" />
+          <ScalarProperty Name="changeDate" ColumnName="changeDate" />
+          <ScalarProperty Name="changedBy" ColumnName="changedBy" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="courseID" ColumnName="courseID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentCredential">
+      <EntityTypeMapping TypeName="StudentPortalModel.StudentCredential">
+        <MappingFragment StoreEntitySet="StudentCredential">
+          <ScalarProperty Name="studentPassword" ColumnName="studentPassword" />
+          <ScalarProperty Name="studentUsername" ColumnName="studentUsername" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentInformation">
+      <EntityTypeMapping TypeName="StudentPortalModel.StudentInformation">
+        <MappingFragment StoreEntitySet="StudentInformation">
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="parentEmail" ColumnName="parentEmail" />
+          <ScalarProperty Name="parentPhoneNumber" ColumnName="parentPhoneNumber" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="studentSurname" ColumnName="studentSurname" />
+          <ScalarProperty Name="studentName" ColumnName="studentName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

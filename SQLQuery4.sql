@@ -1,0 +1,1 @@
+﻿select * from newCourse where Id = 2 and studentID = 2
